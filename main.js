@@ -110,8 +110,13 @@ function generate() {
         });
 
         if (closestLift) {
-            closestLift.style.bottom = targetPosition + 'px';
-            closestLift.style.transition = (targetPosition / move) * 2 + 's'
+
+        const currentFloor = parseInt(closestLift.style.bottom) / move + 1;
+        const floorsToMove = Math.abs(targetFloor - currentFloor);
+        const duration = floorsToMove * 2;
+
+        closestLift.style.transition = `bottom ${duration}s ease`;
+        closestLift.style.bottom = targetPosition + 'px';
         }
     }
 }
