@@ -11,12 +11,12 @@ function generate() {
     const liftWidth = 50;
     const spacing = 60;
 
-    for (var i = 1; i <= liftsValue; i++){
+    for (let i = 1; i <= liftsValue; i++){
 
         const lift = document.createElement("div");
         lift.className = "lift"
 
-        const txt = document.createTextNode("Lift "+i);
+        const txt = document.createTextNode("Lift - "+i);
         lift.appendChild(txt);
         lift.className = "lift";
         lift.id = "lift" + i;
@@ -35,7 +35,9 @@ function generate() {
 
     }
 
-    for (var i = floorsValue; i >= 1; i--){
+    let move = 102;
+
+    for (let i = floorsValue; i >= 1; i--) {
 
         const floors = document.createElement("div");
         floors.className = "floors"
@@ -45,42 +47,98 @@ function generate() {
 
         const up = document.createElement("button");
         up.className = "up"
-        up.id = i
-
-        let move = 102;
+        up.id = i;
         let upid = up.id;
 
-        up.addEventListener('click', function up() {
+        up.addEventListener('click', function () {
+            moveLiftToFloor(i);
+        });
 
-            let liftPosi = 1;
-            
-            if (Math.abs(upid-floorsValue) < Math.abs(upid-1 )) {
-                for (var j = upid; j <= floorsValue; j++){
-                    if (liftPosi == j) {
-                        liftPosi = upid;
-                        for(var a=1; a<=liftsValue; a++){
-                            const lift = document.getElementById('lift'+a);
-                            lift.style.transition = '2s'
-                            lift.style.bottom = (liftPosi - 1) * move + 'px'
-                        }
-                        console.log("if-if")
-                    }
-                    console.log("if-for")
-                }
-            } else {
-                for (var j = upid; j >= 1; j--){
-                    if (liftPosi == j) {
-                        liftPosi = upid;
-                        for(var a=1; a<=liftsValue; a++){
-                            const lift = document.getElementById('lift'+a);
-                            lift.style.transition = '2s'
-                            lift.style.bottom = (liftPosi - 1) * move + 'px'
-                        }
-                        console.log(liftPosi)
-                    }
-                    console.log("else-for")
-                }
+        const down = document.createElement("button");
+        down.className = "down"
+        down.id = i;
+        let downid = down.id;
+
+        down.addEventListener('click', function () {
+            moveLiftToFloor(i);
+        });
+
+        const para = document.createElement("p");
+        const hr = document.createElement("hr");
+        const upTxt = document.createTextNode("UP");
+        const downTxt = document.createTextNode("DOWN");
+        const floorTxt = document.createTextNode("Floor " + i);
+
+        up.appendChild(upTxt)
+        down.appendChild(downTxt)
+        para.appendChild(floorTxt)
+        btns.appendChild(up)
+        btns.appendChild(down)
+        floors.appendChild(btns)
+        floors.appendChild(para)
+        floors.appendChild(hr)
+
+        hr.style.border = "1px solid black";
+
+        floors.style.textAlign = 'right'
+
+        btns.style.display = 'flex'
+        btns.style.flexDirection = 'column'
+        btns.style.width = '100px'
+
+        simulation.appendChild(floors)
+    }
+
+    function moveLiftToFloor(targetFloor) {
+        const lifts = [];
+        for (let i = 1; i <= liftsValue; i++) {
+            const lift = document.getElementById('lift' + i);
+            lifts.push(lift);
+        }
+
+        const targetPosition = (targetFloor - 1) * move;
+        let closestLift = null;
+        let minDistance = Infinity;
+
+        lifts.forEach(lift => {
+            const currentPosition = parseInt(lift.style.bottom);
+            const distance = Math.abs(targetPosition - currentPosition);
+            if (distance < minDistance) {
+                minDistance = distance;
+                closestLift = lift;
             }
+        });
+
+        if (closestLift) {
+            closestLift.style.bottom = targetPosition + 'px';
+            closestLift.style.transition = (targetPosition / move) * 2 + 's'
+        }
+    }
+}
+
+            // if (Math.abs(upid-floorsValue) < Math.abs(upid-1 )) {
+            //     for (var j = upid; j <= floorsValue; j++){
+            //         if (liftPosi == j) {
+            //             liftPosi = upid;
+            //             for(var a=1; a<=liftsValue; a++){
+            //                 const lift = document.getElementById('lift'+a);
+            //                 lift.style.transition = '2s'
+            //                 lift.style.bottom = (liftPosi - 1) * move + 'px'
+            //             }
+            //         }
+            //     }
+            // } else {
+            //     for (var j = upid; j >= 1; j--){
+            //         if (liftPosi == j) {
+            //             liftPosi = upid;
+            //             for(var a=1; a<=liftsValue; a++){
+            //                 const lift = document.getElementById('lift'+a);
+            //                 lift.style.transition = '2s'
+            //                 lift.style.bottom = (liftPosi - 1) * move + 'px'
+            //             }
+            //         }
+            //     }
+            // }
 
             // for (var j = upid; j <= floorsValue; j++){
             //     for (var a = 1; a <= liftsValue; a++) {
@@ -128,41 +186,3 @@ function generate() {
             //     lift.style.bottom = (upid-1) * move + 'px'
             //     liftPosi += move;
             // }
-        });
-        const down = document.createElement("button");
-        down.className = "down"
-
-        down.addEventListener('click', function down() {
-            for (var a = 1; a <= liftsValue; a++) {
-                const lift = document.getElementById('lift'+a);
-                lift.style.transition = '2s'
-                lift.style.bottom = (upid-1) * move + 'px'
-            }
-        });
-
-        const para = document.createElement("p");
-        const hr = document.createElement("hr");
-        const upTxt = document.createTextNode("UP");
-        const downTxt = document.createTextNode("DOWN");
-        const floorTxt = document.createTextNode("Floor " + i);
-
-        up.appendChild(upTxt)
-        down.appendChild(downTxt)
-        para.appendChild(floorTxt)
-        btns.appendChild(up)
-        btns.appendChild(down)
-        floors.appendChild(btns)
-        floors.appendChild(para)
-        floors.appendChild(hr)
-
-        hr.style.border = "1px solid black";
-
-        floors.style.textAlign = 'right'
-
-        btns.style.display = 'flex'
-        btns.style.flexDirection = 'column'
-        btns.style.width = '100px'
-
-        simulation.appendChild(floors)
-    }
-}
