@@ -4,6 +4,24 @@ function generate() {
     const liftsValue = document.getElementById("liftsInput").value;
     const floorsValue = document.getElementById("floorsInput").value;
 
+
+    if (!liftsValue && !floorsValue) {
+        alert("Please enter the number of lifts and floors required");
+        return
+    } else if (!liftsValue) {
+        alert("Please enter the number of lifts required");
+        return
+    }  else if (liftsValue <= 0) {
+        alert("Please enter a positive value at lifts input");
+        return
+    } else if (!floorsValue) {
+        alert("Please enter the number of floors required");
+        return
+    } else if (floorsValue <= 0) {
+        alert("Please enter a positive value at floors input");
+        return
+    }
+    
     simulation.innerHTML = ''
 
     simulation.style.position = 'relative'
@@ -47,7 +65,7 @@ function generate() {
 
         const up = document.createElement("button");
         up.className = "up"
-        up.id = i;
+        up.id = "up" + i;
         let upid = up.id;
 
         up.addEventListener('click', function () {
@@ -56,7 +74,7 @@ function generate() {
 
         const down = document.createElement("button");
         down.className = "down"
-        down.id = i;
+        down.id = "down"+i;
         let downid = down.id;
 
         down.addEventListener('click', function () {
@@ -88,6 +106,11 @@ function generate() {
 
         simulation.appendChild(floors)
     }
+
+    const delUp = document.getElementById("up" + floorsValue);
+    delUp.disabled = true;
+    const delDown = document.getElementById("down" + 1);
+    delDown.disabled = true;
 
     function moveLiftToFloor(targetFloor) {
         const lifts = [];
