@@ -3,36 +3,23 @@ html, body{
     margin: 0;
     background-color: beige;
 }
+.liftSim{
+    text-align: center;
+    color: rgb(68, 68, 68);
+}
+.lift {
+    overflow: hidden; /* Hide overflowing parts of doors */
+    position: relative; /* Ensure the lift container is positioned relative to the parent */
+}
+.leftDoor, .rightDoor{
+    background-color: gray;
+    height: 78px;
+    width: 30px;
+    border: 1px solid darkgray;
+}
 .generator{
     display: flex;
     flex-direction: row;
     justify-content: space-evenly;
     padding: 5px;
 }
-/* .simulation{
-    position: relative;
-}
-hr{
-    border: 1px solid black;
-}
-.floors{
-    text-align: right;
-}
-.btns{
-    display: flex;
-    flex-direction: column;
-    width: 100px;
-}
-.lifts{
-    position: absolute;
-    display: flex;
-    flex-direction: row;
-    bottom: 0;
-    margin-left: 130px;
-    gap: 65px;
-}
-.lift{
-    width: 50px;
-    height: 80px;
-    background-color: blue;
-} */
