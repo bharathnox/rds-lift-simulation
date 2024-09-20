@@ -19,6 +19,8 @@ function generate() {
     } else if (floorsValue <= 0) {
         alert("Please enter a positive value at floors input");
         return;
+    } else if(floorsValue == 1 && liftsValue > 1) {
+        alert("Number of lifts cannot be greater than one if there is only one floor")
     }
 
     simulation.innerHTML = '';
