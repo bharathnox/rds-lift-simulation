@@ -8,8 +8,8 @@ html, body{
     color: rgb(68, 68, 68);
 }
 .lift {
-    overflow: hidden; /* Hide overflowing parts of doors */
-    position: relative; /* Ensure the lift container is positioned relative to the parent */
+    overflow: hidden;
+    position: relative;
 }
 .leftDoor, .rightDoor{
     background-color: gray;
