@@ -11,13 +11,13 @@ function generate() {
         alert("Please enter the number of lifts required");
         return;
     } else if (liftsValue <= 0) {
-        alert("Please enter a positive value at lifts input");
+        alert("Please enter a number greater than zero at lifts input");
         return;
     } else if (!floorsValue) {
         alert("Please enter the number of floors required");
         return;
     } else if (floorsValue <= 0) {
-        alert("Please enter a positive value at floors input");
+        alert("Please enter a number greater than zero at floors input");
         return;
     } else if(floorsValue == 1 && liftsValue > 1) {
         alert("Number of lifts cannot be greater than one if there is only one floor")
