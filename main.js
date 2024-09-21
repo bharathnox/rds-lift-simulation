@@ -105,8 +105,8 @@ function generate() {
         simulation.appendChild(floors);
     }
 
-    document.getElementById("up" + floorsValue).disabled = true;
-    document.getElementById("down" + 1).disabled = true;
+    document.getElementById("up" + floorsValue).remove();
+    document.getElementById("down" + 1).remove();
 
     // Add request to queue and disable the button
     function addToQueue(targetFloor, direction, button) {
