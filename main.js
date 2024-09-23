@@ -65,6 +65,7 @@ function generate() {
         const floors = document.createElement("div");
         floors.className = "floors";
         floors.id = "floor" + i;
+
         const btns = document.createElement("div");
         btns.className = "btns";
 
@@ -105,8 +106,8 @@ function generate() {
         simulation.appendChild(floors);
     }
 
-    document.getElementById("up" + floorsValue).remove();
-    document.getElementById("down" + 1).remove();
+    document.getElementById("up" + floorsValue).style.visibility = 'hidden';
+    document.getElementById("down" + 1).style.visibility = 'hidden';
 
     // Add request to queue and disable the button
     function addToQueue(targetFloor, direction, button) {
